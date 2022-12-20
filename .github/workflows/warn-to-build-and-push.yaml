@@ -1,0 +1,19 @@
+name: Warn to Build and Push Dockerfile manually if PR is merged into main
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  warn-to-build-and-push:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main'
+    steps:
+      - name: Warn to Build and Push Dockerfile manually
+        run: |
+          function comment_on_pr() {
+            local body="$1"
+            gh pr comment "${{ github.event.number }}" --repo "${{ github.repository }}" --body "$body"
+          }
+
+          comment_on_pr "This PR was merged into 'main'. Please [build and push](https://github.com/robocin/containers/actions/) a 'latest' Docker image.
