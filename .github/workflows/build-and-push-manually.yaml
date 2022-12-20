@@ -47,7 +47,7 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_ID }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
       - name: Set environment variables for Dockerfile name, directory and tag
-        id: set env vars
+        id: set-env-vars
         run: |
           echo "file-name=$(basename '${{ github.event.inputs.full-name }}' .Dockerfile)" >> $GITHUB_ENV
           echo "dir-name=$(dirname '${{ github.event.inputs.full-name }}')" >> $GITHUB_ENV
