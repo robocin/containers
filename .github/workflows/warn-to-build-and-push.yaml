@@ -17,3 +17,5 @@ jobs:
           }
 
           comment_on_pr "This PR was merged into 'main'. Please [build and push](https://github.com/robocin/containers/actions/) a 'latest' Docker image, if applicable."
+        env:
+          GH_TOKEN: ${{ github.token }}
