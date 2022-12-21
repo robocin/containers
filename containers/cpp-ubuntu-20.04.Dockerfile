@@ -6,6 +6,7 @@ COPY ./scripts/robocin-install.sh /usr/local/bin/robocin-install
 
 RUN robocin-install \
     cmake \
+    ninja \
     g++ \
     grpc \
     googletest \
