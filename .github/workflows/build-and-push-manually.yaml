@@ -57,10 +57,11 @@ jobs:
             echo "tag-name=manual-${{ github.event.inputs.tag }}" >> $GITHUB_ENV
           fi
       - name: Build and Push Dockerfile
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           context: ${{ env.dir-name }}
           file: ${{ github.event.inputs.full-name }}
           push: true
+          platforms: linux/amd64,linux/arm64
           tags: |
             ${{ secrets.DOCKER_HUB_ID }}/${{ env.file-name }}:${{ env.tag-name }}
