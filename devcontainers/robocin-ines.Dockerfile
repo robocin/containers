@@ -11,3 +11,6 @@ RUN bash /tmp/libzmq.sh
 RUN bash /tmp/cppzmq.sh
 
 RUN apt install libboost-all-dev libmpfrc++-dev -y
+RUN pip3 install --upgrade pip
+RUN pip3 install netifaces
+RUN pip3 install pyzmq
