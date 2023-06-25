@@ -10,7 +10,6 @@ if ! is_root; then
 fi
 
 INSTALL_DIR="${1}"
-CURRENT_USER=$(who | awk 'NR==1{print $1}')
 
 if [ -z "${INSTALL_DIR}" ]; then
   INSTALL_DIR="/usr"
