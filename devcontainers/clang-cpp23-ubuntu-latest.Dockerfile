@@ -22,3 +22,6 @@ ADD https://github.com/ninja-build/ninja/releases/download/v1.11.1/ninja-linux.z
 RUN unzip /tmp/ninja.zip -d /tmp/ && \
   mv /tmp/ninja /usr/bin/ && \
   rm -rf /tmp/ninja /tmp/ninja.zip
+
+RUN bash -c "$(wget -O - $GITHUB_SOURCE_CONTENT_PREFIX/benchmark.sh)"
+RUN bash -c "$(wget -O - $GITHUB_SOURCE_CONTENT_PREFIX/googletest.sh)"
