@@ -28,3 +28,9 @@ RUN bash -c "$(wget -O - $GITHUB_SOURCE_CONTENT_PREFIX/benchmark.sh)"
 RUN bash -c "$(wget -O - $GITHUB_SOURCE_CONTENT_PREFIX/googletest.sh)"
 
 RUN bash -c "$(wget -O - $GITHUB_SOURCE_CONTENT_PREFIX/grpc.sh)"
+
+COPY ./scripts/libzmq.sh /tmp/libzmq.sh
+COPY ./scripts/cppzmq.sh /tmp/cppzmq.sh
+
+RUN bash /tmp/libzmq.sh
+RUN bash /tmp/cppzmq.sh
