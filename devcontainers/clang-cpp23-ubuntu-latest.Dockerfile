@@ -7,7 +7,7 @@ ARG GITHUB_SOURCE_CONTENT_PREFIX="https://raw.githubusercontent.com/robocin/scri
 RUN bash -c "$(wget -O - $GITHUB_SOURCE_CONTENT_PREFIX/g++.sh)"
 RUN bash -c "$(wget -O - $GITHUB_SOURCE_CONTENT_PREFIX/llvm.sh)"
 
-ARG VERSION=3.28.0-rc5
+ARG VERSION=3.28.1
 
 ADD https://github.com/Kitware/CMake/releases/download/v$VERSION/cmake-$VERSION.tar.gz /tmp/cmake.tar.gz
 
