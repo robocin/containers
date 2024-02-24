@@ -17,7 +17,7 @@ if [ -z "${VERSION}" ]; then
   exit 1
 fi
 
-DEST_DIR="." # "/usr/local/bin"
+DEST_DIR="/usr/bin"
 TMP_DIR="/tmp/ninja"
 
 echo -e "\x1B[01;93mInstalling or updating ninja...\n\u001b[0m"

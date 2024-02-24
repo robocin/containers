@@ -9,11 +9,17 @@ if ! is_root; then
   exit 1
 fi
 
-PARENT_DIR="${1}"
+VERSION="${1}"
+PARENT_DIR="${2}"
 CURRENT_USER=$(who | awk 'NR==1{print $1}')
 
+if [ -z "${VERSION}" ]; then
+  echo -e "\x1B[31m[ERROR] No version specified."
+  exit 1
+fi
+
 if [ -z "${PARENT_DIR}" ]; then
-  PARENT_DIR="/opt"
+  PARENT_DIR="/usr/local"
 fi
 
 LIBZMQ_DIR="${PARENT_DIR}/libzmq"
@@ -22,20 +28,20 @@ TMP_LIBZMQ="/tmp/libzmq"
 rm -rf "${TMP_LIBZMQ}"
 mkdir -p "${TMP_LIBZMQ}"
 
-git clone https://github.com/zeromq/libzmq.git -o libzmq "${TMP_LIBZMQ}"
+wget "https://github.com/zeromq/libzmq/releases/download/v${VERSION}/zeromq-${VERSION}.tar.gz" -O "${TMP_LIBZMQ}/zeromq-${VERSION}.tar.gz"
+tar -xvf "${TMP_LIBZMQ}/zeromq-${VERSION}.tar.gz" -C "${TMP_LIBZMQ}"
+rm -rf "${TMP_LIBZMQ}/zeromq-${VERSION}.tar.gz"
 
-mkdir -p "${TMP_LIBZMQ}/build"
-
-pushd "${TMP_LIBZMQ}/build" || exit 1
-cmake .. \
-  -DCMAKE_BUILD_TYPE=Release \
-  -DZMQ_BUILD_TESTS=OFF \
-  -DCMAKE_INSTALL_PREFIX="${LIBZMQ_DIR}"
-
-make -j "$(nproc)"
-make install
+pushd "${TMP_LIBZMQ}/zeromq-${VERSION}" || exit 1
+cmake -B build \
+      -S . \
+      -DZMQ_BUILD_TESTS=OFF \
+      -DCMAKE_BUILD_TYPE=Release \
+      -DCMAKE_INSTALL_PREFIX="${LIBZMQ_DIR}"
+cmake --build build -j "$(nproc)"
+cmake --install build
 popd || exit 1
 
 rm -rf "${TMP_LIBZMQ}"
 
-chown -R "${CURRENT_USER}:${CURRENT_USER}" "${LIBZMQ_DIR}"
+chown "${CURRENT_USER}":"${CURRENT_USER}" "${LIBZMQ_DIR}" -R # changes the owner of the directory to the current user

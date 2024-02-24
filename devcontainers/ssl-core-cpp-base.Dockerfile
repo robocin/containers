@@ -1,6 +1,6 @@
-FROM mcr.microsoft.com/vscode/devcontainers/base:latest
+FROM mcr.microsoft.com/vscode/devcontainers/base:ubuntu
 
-ARG    GCC_VERSION='12'
+ARG    GCC_VERSION='13'
 ARG   LLVM_VERSION='18'
 ARG  CMAKE_VERSION='3.29.0-rc2'
 ARG  NINJA_VERSION='1.11.1'
@@ -13,19 +13,19 @@ WORKDIR /tmp/scripts
 
 RUN apt update && apt upgrade -y && \
   \
-  bash   gcc.sh   '${GCC_VERSION}' && \
-  bash  llvm.sh  '${LLVM_VERSION}' && \
-  bash cmake.sh '${CMAKE_VERSION}' && \
-  bash ninja.sh '${NINJA_VERSION}' && \
+  bash   gcc.sh   ${GCC_VERSION} && \
+  bash  llvm.sh  ${LLVM_VERSION} && \
+  bash cmake.sh ${CMAKE_VERSION} && \
+  bash ninja.sh ${NINJA_VERSION} && \
   \
   bash googletest.sh '/usr/local' && \
   bash  benchmark.sh '/usr/local' && \
   \
   bash protobuf.sh '/usr/local' && \
   \
-  bash libzmq.sh '${LIBZMQ_VERSION}' '/usr/local' && \
-  bash cppzmq.sh '${CPPZMQ_VERSION}' '/usr/local' && \
+  bash libzmq.sh ${LIBZMQ_VERSION} '/usr/local' && \
+  bash cppzmq.sh ${CPPZMQ_VERSION} '/usr/local' && \
   \
-  bash buf.sh '${BUF_VERSION}' '/usr/local/bin'
+  bash buf.sh ${BUF_VERSION} '/usr/local/bin'
 
 RUN rm -rf /tmp/scripts

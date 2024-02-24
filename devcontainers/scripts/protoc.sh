@@ -9,10 +9,17 @@ if ! is_root; then
   exit 1
 fi
 
-INSTALL_DIR="${1}"
+VERSION="${1}"
+PARENT_DIR="${2}"
+CURRENT_USER=$(who | awk 'NR==1{print $1}')
 
-if [ -z "${INSTALL_DIR}" ]; then
-  INSTALL_DIR="/usr"
+if [ -z "${VERSION}" ]; then
+  echo -e "\x1B[31m[ERROR] No version specified."
+  exit 1
+fi
+
+if [ -z "${PARENT_DIR}" ]; then
+  PARENT_DIR="/usr/local"
 fi
 
 TMP_DIR="/tmp/protoc"
@@ -20,9 +27,13 @@ TMP_DIR="/tmp/protoc"
 rm -rf "${TMP_DIR}"
 mkdir -p "${TMP_DIR}"
 
-pushd "${TMP_DIR}" || exit 1
+curl -sSL "https://github.com/protocolbuffers/protobuf/releases/download/v${VERSION}/protoc-${VERSION}-linux-x86_64.zip" -o "${TMP_DIR}/protoc-${VERSION}.zip"
+unzip -qo "${TMP_DIR}/protoc-${VERSION}.zip" -d "${TMP_DIR}/protoc-${VERSION}"
 
-curl -LO https://github.com/protocolbuffers/protobuf/releases/download/v23.3/protoc-23.3-linux-x86_64.zip
-unzip -o protoc-23.3-linux-x86_64.zip -d "${INSTALL_DIR}"
+rsync -a --include="*/***" --exclude="*" "${TMP_DIR}/protoc-${VERSION}/" "${PARENT_DIR}/"
 
-popd || exit 1
+rm -rf "${TMP_DIR}"
+
+chmod +x "${PARENT_DIR}/bin/protoc"
+
+chown "${CURRENT_USER}":"${CURRENT_USER}" "${PARENT_DIR}" -R # changes the owner of the directory to the current user
