@@ -1,13 +1,12 @@
 FROM mcr.microsoft.com/vscode/devcontainers/base:ubuntu
 
-ARG      GCC_VERSION='13'
-ARG     LLVM_VERSION='18'
-ARG    CMAKE_VERSION='3.29.0-rc2'
-ARG    NINJA_VERSION='1.11.1'
-ARG      BUF_VERSION='1.28.1'
-ARG   LIBZMQ_VERSION='4.3.5'
-ARG   CPPZMQ_VERSION='4.10.0'
-ARG MONGOCXX_VERSION='3.10.0'
+ARG    GCC_VERSION='13'
+ARG   LLVM_VERSION='18'
+ARG  CMAKE_VERSION='3.29.0-rc2'
+ARG  NINJA_VERSION='1.11.1'
+ARG    BUF_VERSION='1.28.1'
+ARG LIBZMQ_VERSION='4.3.5'
+ARG CPPZMQ_VERSION='4.10.0'
 
 COPY devcontainers/scripts /tmp/scripts
 WORKDIR /tmp/scripts
@@ -29,6 +28,5 @@ RUN apt update && apt upgrade -y && \
   \
   bash buf.sh ${BUF_VERSION} '/usr/local/bin' && \
   \
-  bash mongocxx.sh ${MONGOCXX_VERSION} '/usr/local'
+  rm -rf /tmp/scripts
 
-RUN rm -rf /tmp/scripts
