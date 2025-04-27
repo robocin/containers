@@ -1,6 +1,9 @@
 name: Build and Push Dockerfiles manually
 
-on:
+on:  
+  push:
+    branches:
+      - main
   workflow_dispatch:
     inputs:
       full-name:
