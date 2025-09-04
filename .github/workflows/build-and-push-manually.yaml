@@ -1,19 +1,15 @@
 name: Build and Push Dockerfiles manually
 
-on:  
-  push:
-    branches:
-      - main
-  workflow_dispatch:
-    inputs:
-      full-name:
-        type: string
-        description: "Dockerfile name with full path (e.g. 'this/folder/image/name.Dockerfile')"
-        required: true
-      tag:
-        type: string
-        description: "Docker image tag (e.g. 'latest', '1.0.0', 'pr-123'). 'manual-' will be prepended to the tag if it is not 'latest'."
-        required: true
+workflow_dispatch:
+  inputs:
+    full-name:
+      type: string
+      description: "Dockerfile name with full path (e.g. 'this/folder/image/name.Dockerfile')"
+      required: true
+    tag:
+      type: string
+      description: "Docker image tag (e.g. 'latest', '1.0.0', 'pr-123'). 'manual-' will be prepended to the tag if it is not 'latest'."
+      required: true
 
 jobs:
   verify-arguments:
