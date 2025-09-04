@@ -17,6 +17,8 @@ function exec_from_git_source_repository() {
 
   local script="$GITHUB_SOURCE_CONTENT_PREFIX/$name.sh"
 
+  echo "Downloading $script"
+
   if ! wget -q --spider "$script"; then
     echo -e "\x1B[31m[ERROR] Script '$name' not found."
     exit 1
