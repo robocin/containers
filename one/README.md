@@ -5,7 +5,7 @@
 For all docker images inside this folder, please *enforce* tagging with:
 
 ```bash
-[...] --tag one/image-name:version
+[...] --tag one/robocin/image-name:version
 ```
 
 ### Containers
@@ -48,3 +48,12 @@ To publish image to Docker Hub, use action [Build and Push manually](https://git
 
 > [!WARNING]  
 > Do not create docker images in your project repository. If you want to create an image for your project, create under `one/` folder. If you already have images, please move & refactor them here.
+
+### On `docker-compose.yaml`
+Please use the published image on your docker compose:
+```yaml
+# docker-compose.yaml
+your-container:
+   container_name: my-container-name
+   image: one/robocin/image-name:latest
+```
