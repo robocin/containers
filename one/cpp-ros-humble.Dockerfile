@@ -1,4 +1,4 @@
-FROM ros:jazzy-ros-base
+FROM ros:humble-ros-base
 
 LABEL one.project="multiple" \
       one.type="devcontainer" \
