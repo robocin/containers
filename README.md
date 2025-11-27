@@ -2,10 +2,10 @@
 > Please try as best as you can to not setup RobôCIn projects on your own computer, try to use RoboCIn provided docker images if it exists or work with your team to [create a new image](./one/README.md).
 
 This repo contains the docker image definitions for all RobôCIn officially supported images. There are two types of images here:
-- **Development**: Used for creating devcontainers and local testing.
+- **Devcontainer**: Used for creating devcontainers and local testing.
 - **Runtime**: Exclusive to deployment in our robots, with size optimization.
 
-Try to use **development** docker images on your day-to-day work. For a complete list of existing images, please refer to [RobôCIn's Docker Hub](https://hub.docker.com/u/robocin).
+Try to use **devcontainer** docker images on your day-to-day work. For a complete list of existing images, please refer to [RobôCIn's Docker Hub](https://hub.docker.com/u/robocin).
 
 # Prerequisites
 - Docker ([link](https://www.docker.com/get-started/))
@@ -13,7 +13,7 @@ Try to use **development** docker images on your day-to-day work. For a complete
 - Dev Containers ([extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers), [site](https://containers.dev/), [spec](https://containers.dev/implementors/spec/))
 
 # How to use?
-## Development
+## Devcontainers
 For development environments, we use [devcontainers](https://containers.dev/).
 
 **1) Create `.devcontainer` folder + `devcontainer.json`** file.
