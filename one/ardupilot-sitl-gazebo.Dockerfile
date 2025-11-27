@@ -1,6 +1,6 @@
 FROM ardupilot/ardupilot-dev-ros:latest
 
-LABEL one.project="multiple" \
+LABEL one.project="flying-robots" \
       one.type="devcontainer" \
       one.environment="dogfood" \
       one.owner="robocin@cin.ufpe.br, fnap@cin.ufpe.br" \
