@@ -1,26 +1,23 @@
-FROM osrf/ros:humble-desktop-full
+FROM mcr.microsoft.com/vscode/devcontainers/base:ubuntu
 
 LABEL one.project="multiple" \
       one.type="devcontainer" \
       one.environment="dogfood" \
-      one.owner="robocin@cin.ufpe.br, fnap@cin.ufpe.br" \
+      one.owner="robocin@cin.ufpe.br, jvsc@cin.ufpe.br, fnap@cin.ufpe.br" \
       one.version="1.0.0" \
       one.description="This image is RobôCIn's base image for developing \
-      in linux vanilla + cpp + ros2 in ui-dependent environments."
+      in linux latest version + cpp environments."
 
 RUN apt update && apt upgrade -y
 
-RUN apt-get install wget -y
-
 COPY ./scripts/robocin-install.sh /usr/local/bin/robocin-install
-COPY ./scripts/robocin-user.sh /usr/local/bin/robocin-user
-
-RUN robocin-user
 
 RUN robocin-install \
     cmake \
     ninja \
+    python \
     g++ \
+    grpc \
     googletest \
-    llvm \
-    clang-format
+    benchmark \
+    llvm

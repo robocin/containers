@@ -1,5 +1,13 @@
 FROM mcr.microsoft.com/devcontainers/go:1.23
 
+LABEL one.project="multiple" \
+      one.type="devcontainer" \
+      one.environment="dogfood" \
+      one.owner="robocin@cin.ufpe.br, jvsc@cin.ufpe.br, fnap@cin.ufpe.br" \
+      one.version="1.0.0" \
+      one.description="This image is RobôCIn's base image for developing \
+      in linux vanilla + go + protobuf + grpc environments."
+
 RUN set -x && \
     apt update && apt upgrade -y && \
     \
