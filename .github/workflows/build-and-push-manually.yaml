@@ -9,7 +9,7 @@ on:
         required: true
       tag:
         type: string
-        description: "Docker image tag (e.g. 'latest', '1.0.0', 'pr-123'). 'manual-' will be prepended to the tag if it is not 'latest'."
+        description: "Docker image tag (e.g. '1.0.0', 'pr-123'). Do not use latest here, it will be added automatically."
         required: true
 
 jobs:
