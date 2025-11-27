@@ -3,7 +3,7 @@ name: Build and Push Dockerfiles manually
 on:
   workflow_dispatch:
     inputs:
-      full-name:
+      fullname:
         type: string
         description: "Dockerfile name with full path (e.g. 'this/folder/image/name.Dockerfile')"
         required: true
@@ -20,7 +20,7 @@ jobs:
         uses: actions/checkout@v3
       - name: Assert that arguments are valid
         run: |
-          if [[ "${{ github.event.inputs.full-name }}" == "" ]]; then
+          if [[ "${{ github.event.inputs.fullname }}" == "" ]]; then
             echo "Dockerfile name cannot be empty."
             exit 1
           fi
@@ -28,8 +28,8 @@ jobs:
             echo "Tag cannot be empty."
             exit 1
           fi
-          if [[ ! -f "${{ github.event.inputs.full-name }}" ]]; then
-            echo "Dockerfile '${{ github.event.inputs.full-name }}' does not exist."
+          if [[ ! -f "${{ github.event.inputs.fullname }}" ]]; then
+            echo "Dockerfile '${{ github.event.inputs.fullname }}' does not exist."
             exit 1
           fi
 
@@ -49,14 +49,14 @@ jobs:
       - name: Set environment variables for Dockerfile name, directory and tag
         id: set-env-vars
         run: |
-          echo "file-name=$(basename '${{ github.event.inputs.full-name }}' .Dockerfile)" >> $GITHUB_ENV
-          echo "dir-name=$(dirname '${{ github.event.inputs.full-name }}')" >> $GITHUB_ENV
+          echo "filename=$(basename '${{ github.event.inputs.fullname }}' .Dockerfile)" >> $GITHUB_ENV
+          echo "dirname=$(dirname '${{ github.event.inputs.fullname }}')" >> $GITHUB_ENV
 
-          echo "tag-names=${{ secrets.DOCKER_HUB_ID }}/${{ env.file-name }}:${{ github.event.inputs.tag }},${{ secrets.DOCKER_HUB_ID }}/${{ env.file-name }}:latest" >> $GITHUB_ENV
+          echo "tag-names=${{ secrets.DOCKER_HUB_ID }}/$filename:${{ github.event.inputs.tag }},${{ secrets.DOCKER_HUB_ID }}/$filename:latest" >> $GITHUB_ENV
       - name: Build and Push Dockerfile
         uses: docker/build-push-action@v3
         with:
-          context: ${{ env.dir-name }}
-          file: ${{ github.event.inputs.full-name }}
+          context: ${{ env.dirname }}
+          file: ${{ github.event.inputs.fullname }}
           push: true
           tags: ${{ env.tag-names }}
