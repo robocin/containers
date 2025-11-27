@@ -52,7 +52,7 @@ jobs:
           echo "file-name=$(basename '${{ github.event.inputs.full-name }}' .Dockerfile)" >> $GITHUB_ENV
           echo "dir-name=$(dirname '${{ github.event.inputs.full-name }}')" >> $GITHUB_ENV
 
-          echo "tag-names=${{ secrets.DOCKER_HUB_ID }}/$file_name:${{ github.event.inputs.tag }},${{ secrets.DOCKER_HUB_ID }}/$file_name:latest" >> $GITHUB_ENV
+          echo "tag-names=${{ secrets.DOCKER_HUB_ID }}/$file-name:${{ github.event.inputs.tag }},${{ secrets.DOCKER_HUB_ID }}/$file-name:latest" >> $GITHUB_ENV
       - name: Build and Push Dockerfile
         uses: docker/build-push-action@v3
         with:
