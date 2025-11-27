@@ -8,13 +8,14 @@ LABEL one.project="multiple" \
       one.description="This image is RobôCIn's base image for developing \
       in linux vanilla + cpp + ros2 in ui-dependent environments."
 
-RUN userdel -r ubuntu; usermod -u 1000 vscode; groupmod -g 1000 vscode
-
 RUN apt update && apt upgrade -y
 
 RUN apt-get install wget -y
 
 COPY ./scripts/robocin-install.sh /usr/local/bin/robocin-install
+COPY ./scripts/robocin-user.sh /usr/local/bin/robocin-user
+
+RUN robocin-user
 
 RUN robocin-install \
     cmake \
