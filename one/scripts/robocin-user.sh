@@ -46,6 +46,8 @@ if ! id -u "$USERNAME" >/dev/null 2>&1; then
         -s /bin/bash \
         "$USERNAME" \
         2>/dev/null || true # silent failure
+    usermod -aG sudo "$USERNAME"
+    echo "${USERNAME} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 else
     echo "[INFO] User ${USERNAME} already exists."
 fi
