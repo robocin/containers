@@ -1,14 +1,19 @@
 FROM ardupilot/ardupilot-dev-ros:latest
 
-LABEL one.project="flying-robots" \
+LABEL one.project="multiple" \
       one.type="devcontainer" \
       one.environment="dogfood" \
       one.owner="robocin@cin.ufpe.br, fnap@cin.ufpe.br" \
       one.version="1.0.0" \
       one.description="This image is RobôCIn's base image for running \
-      ardupilot sitl + gazebo + ros2."
+      ardupilot sitl + gazebo + ros2 with NVIDIA GPU support."
 
 SHELL ["/bin/bash", "-c"]
+
+ENV NVIDIA_VISIBLE_DEVICES \
+    ${NVIDIA_VISIBLE_DEVICES:-all}
+ENV NVIDIA_DRIVER_CAPABILITIES \
+    ${NVIDIA_DRIVER_CAPABILITIES:+$NVIDIA_DRIVER_CAPABILITIES,}graphics
 
 WORKDIR /root/ardu_ws/src
 RUN vcs import --recursive --input https://raw.githubusercontent.com/ArduPilot/ardupilot/master/Tools/ros2/ros2.repos
