@@ -46,6 +46,10 @@ if ! id -u "$USERNAME" >/dev/null 2>&1; then
         -s /bin/bash \
         "$USERNAME" \
         2>/dev/null || true # silent failure
+    
+    # Grant sudo privileges without password (overkill for devcontainer, move fast approach)
+    echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME
+    chmod 0440 /etc/sudoers.d/$USERNAME 
 else
     echo "[INFO] User ${USERNAME} already exists."
 fi
