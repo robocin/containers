@@ -20,7 +20,9 @@ RUN robocin-install \
     g++ \
     googletest \
     llvm \
-    clang-format
+    clang-format \
+    ros2-dependencies \
+    eigen
 
 RUN robocin-user
 USER robocin
