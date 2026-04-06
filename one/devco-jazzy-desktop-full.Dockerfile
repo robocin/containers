@@ -22,7 +22,9 @@ RUN robocin-install \
     llvm \
     clang-format \
     pip \
-    miniconda
+    miniconda \
+    ros2-dependencies \
+    eigen
 
 RUN robocin-user
 USER robocin
