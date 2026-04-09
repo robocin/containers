@@ -26,5 +26,9 @@ RUN robocin-install \
     ros2-dependencies \
     eigen
 
+RUN pip3 install \
+    pre-commit \
+    --break-system-packages
+
 RUN robocin-user
 USER robocin
