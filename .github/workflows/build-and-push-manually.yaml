@@ -58,6 +58,7 @@ jobs:
           context: ${{ env.dir-name }}
           file: ${{ github.event.inputs.full-name }}
           push: true
+          platforms: linux/amd64,linux/arm64
           tags: |
             ${{ secrets.DOCKER_HUB_ID }}/${{ env.file-name }}:${{ env.tag-name }}
             ${{ secrets.DOCKER_HUB_ID }}/${{ env.file-name }}:latest
